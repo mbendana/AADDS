@@ -5,7 +5,7 @@
 read -p "Please enter the managed instance domain name (Example: example.com): " domainName
 
 #Get VM name
-computerName=hostname
+#computerName=hostname
 
 #Modify /etc/hosts file
 sudo echo "127.0.0.1 $(hostname).$domainName $(hostname)" | tr '[:upper:]' '[:lower:]' >> hosts
@@ -58,13 +58,13 @@ sudo sed -i -r 's/^(PasswordAuthentication (n|N)o|#PasswordAuthentication (n|N)o
 #sudo systemctl restart ssh
 
 #Modify the /etc/pam.d/common-session file
-sudo echo "session required pam_mkhomedir.so skel=/etc/skel/ umask=0077" >> common-session
+sudo sed -i -r '/pam_sss.so/a session required pam_mkhomedir.so skel=/etc/skel/ umask=0077' common-session
 #Actual file is:
 #sudo echo "session required pam_mkhomedir.so skel=/etc/skel/ umask=0077" >> /etc/pam.d/common-session
 
 #Modify /etc/sudoers file
-#sudo echo "# Add 'AAD DC Administrators' group members as admins." >> sudoers
-#sudo echo "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL" >> sudoers
+sudo echo "# Add 'AAD DC Administrators' group members as admins." >> sudoers
+sudo echo "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL" >> sudoers
 #Actual file is:
 #sudo echo "# Add 'AAD DC Administrators' group members as admins." >> /etc/sudoers
 #sudo echo "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
