@@ -14,6 +14,7 @@ sudo cat /etc/hosts | grep 127.0.0.1
 sudo echo ""
 
 #Install required components
+sudo echo "Installing required components krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli"
 sudo apt-get update
 sudo apt-get install krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli
 sudo echo ""
