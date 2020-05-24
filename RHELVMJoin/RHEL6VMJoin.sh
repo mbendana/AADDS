@@ -9,14 +9,14 @@ echo ""
 
 #Modify /etc/hosts file with 127.0.0.1 rhel rhel.aaddscontoso.com
 echo "Modifying the /etc/hosts file"
-sudo sed -i -r "/^127.0.0.1 localhost/i 127.0.0.1 $( echo $(hostname) $(hostname).$domainName | tr '[:upper:]' '[:lower:]')" /etc/hosts
+sudo sed -i -r "/^127.0.0.1/i 127.0.0.1 $( echo $(hostname) $(hostname).$domainName | tr '[:upper:]' '[:lower:]')" /etc/hosts
 echo "grep output from /etc/hosts file"
 sudo cat /etc/hosts | grep 127.0.0.1
 echo ""
 
 #Install required components
 echo "Installing required packages adcli sssd authconfig krb5-workstation"
-sudo yum install adcli sssd authconfig krb5-workstation
+sudo yum -y install adcli sssd authconfig krb5-workstation
 echo ""
 
 #Get the admin user who will join the VM to the managed instance
@@ -35,7 +35,7 @@ echo ""
 
 #Modify the /etc/krb5.conf
 echo "Modifying the /etc/krb5.conf file"
-sudo echo "
+echo "
 [logging]
  default = FILE:/var/log/krb5libs.log
  kdc = FILE:/var/log/krb5kdc.log
@@ -57,12 +57,12 @@ sudo echo "
 
 [domain_realm]
  .${domainName^^} = ${domainName^^}
- ${domainName^^} = ${domainName^^}" > /etc/krb5.conf
+ ${domainName^^} = ${domainName^^}" | sudo tee /etc/krb5.conf
  echo ""
  
  #Modify the /etc/sssd/sssd.conf file
 echo "Modifying the /etc/sssd/sssd.conf file"
-sudo echo "
+echo "
 [sssd]
  services = nss, pam, ssh, autofs
  config_file_version = 2
@@ -70,11 +70,11 @@ sudo echo "
 
 [domain/${domainName^^}]
 
- id_provider = ad" > /etc/sssd/sssd.conf
+ id_provider = ad" | sudo tee /etc/sssd/sssd.conf
  echo ""
 
-#Modify file /etc/sssd/sssd.conf permissions and owner
-echo "Modifying file /etc/sssd/sssd.conf permissions and owner" 
+#Modify file /etc/sssd/sssd.conf permissions to 600 and owner:group to root:root
+echo "Modifying file /etc/sssd/sssd.conf permissions to 600 and owner:group to root:root" 
 sudo chmod 600 /etc/sssd/sssd.conf
 sudo chown root:root /etc/sssd/sssd.conf
 echo ""
@@ -92,7 +92,7 @@ echo ""
 
 #Query user AD information using getent
 echo "Querying user AD information using getent"
-sudo getent passwd contosoadmin
+sudo getent passwd $domainAdmin
 echo ""
 
 #Modify the /etc/ssh/sshd_config file with PasswordAuthentication yes
@@ -110,7 +110,7 @@ echo ""
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
 echo "Modifying the /etc/sudoers file"
 echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
-echo "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+echo "%AAD\ DC\ Administrators@$domainName ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 echo "grep output from /etc/sudoers file"
 sudo cat /etc/sudoers | grep 'AAD[\] DC[\] Administrators'
 echo ""
