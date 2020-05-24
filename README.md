@@ -7,6 +7,13 @@ On RHEL 7:\
 /etc/ssh/sshd_config\
 /etc/sudoers
 
+On RHEL 6:\
+/etc/hosts\
+/etc/krb5.conf\
+/etc/sssd/sssd.conf\
+/etc/ssh/sshd_config\
+/etc/sudoers
+
 The script also installs the following required packages:\
 On RHEL 7:\
 realmd\
@@ -16,6 +23,12 @@ krb5-libs\
 oddjob\
 oddjob-mkhomedir\
 samba-common-tools
+
+On RHEL 6:\
+adcli\
+sssd\
+authconfig\
+krb5-workstation
 
 STEPS:
 1. On the RHEL (7/6) VM, create a new .sh file with Nano or Vi(m). Examples:\
