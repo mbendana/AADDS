@@ -1,13 +1,15 @@
+# [THE RHEL SCRIPTS HAVE NOT BEEN TESTED YET]
+
 These scripts are to join RHEL 7/6 VMs to an AADDS managed instance by automatically configuring everything found at:
 https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-rhel-linux-vm
 
 As per the doc, the script makes modifications to the following files:\
-On RHEL 7:\
+**On RHEL 7:**\
 /etc/hosts\
 /etc/ssh/sshd_config\
 /etc/sudoers
 
-On RHEL 6:\
+**On RHEL 6:**\
 /etc/hosts\
 /etc/krb5.conf\
 /etc/sssd/sssd.conf\
@@ -15,7 +17,7 @@ On RHEL 6:\
 /etc/sudoers
 
 The script also installs the following required packages:\
-On RHEL 7:\
+**On RHEL 7:**\
 realmd\
 sssd\
 krb5-workstation\
@@ -24,13 +26,13 @@ oddjob\
 oddjob-mkhomedir\
 samba-common-tools
 
-On RHEL 6:\
+**On RHEL 6:**\
 adcli\
 sssd\
 authconfig\
 krb5-workstation
 
-STEPS:
+**STEPS:**
 1. On the RHEL (7/6) VM, create a new .sh file with Nano or Vi(m). Examples:\
 nano rhel.sh\
 vi rhel.sh\
