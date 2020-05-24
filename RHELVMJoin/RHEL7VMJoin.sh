@@ -9,14 +9,14 @@ echo ""
 
 #Modify /etc/hosts file with 127.0.0.1 rhel rhel.aaddscontoso.com
 echo "Modifing the /etc/hosts file"
-sudo sed -i -r "/^127.0.0.1 localhost/i 127.0.0.1 $( echo $(hostname) $(hostname).$domainName | tr '[:upper:]' '[:lower:]')" /etc/hosts
+sudo sed -i -r "/^127.0.0.1/i 127.0.0.1 $( echo $(hostname) $(hostname).$domainName | tr '[:upper:]' '[:lower:]')" /etc/hosts
 echo "grep output from /etc/hosts file"
 sudo cat /etc/hosts | grep 127.0.0.1
 echo ""
 
 #Install required components
 echo "Installing required packages realmd sssd krb5-workstation krb5-libs oddjob oddjob-mkhomedir samba-common-tools"
-sudo yum install realmd sssd krb5-workstation krb5-libs oddjob oddjob-mkhomedir samba-common-tools
+sudo yum -y install realmd sssd krb5-workstation krb5-libs oddjob oddjob-mkhomedir samba-common-tools
 echo ""
 
 #Get the admin user who will join the VM to the managed instance
@@ -53,7 +53,7 @@ echo ""
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
 echo "Modifing the /etc/sudoers file"
 echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
-echo "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+echo "%AAD\ DC\ Administrators@$domainName ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 echo "grep output from /etc/sudoers file"
 sudo cat /etc/sudoers | grep 'AAD[\] DC[\] Administrators'
 echo ""
