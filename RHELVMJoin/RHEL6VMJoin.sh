@@ -8,7 +8,7 @@ read -p "Please enter the managed instance domain name (Example: aaddscontoso.co
 echo ""
 
 #Modify /etc/hosts file with 127.0.0.1 rhel rhel.aaddscontoso.com
-echo "Modifing the /etc/hosts file"
+echo "Modifying the /etc/hosts file"
 sudo sed -i -r "/^127.0.0.1 localhost/i 127.0.0.1 $( echo $(hostname) $(hostname).$domainName | tr '[:upper:]' '[:lower:]')" /etc/hosts
 echo "grep output from /etc/hosts file"
 sudo cat /etc/hosts | grep 127.0.0.1
@@ -34,7 +34,7 @@ sudo adcli join $domainName -U $domainAdmin
 echo ""
 
 #Modify the /etc/krb5.conf
-echo "Modifing the /etc/krb5.conf file"
+echo "Modifying the /etc/krb5.conf file"
 sudo echo "
 [logging]
  default = FILE:/var/log/krb5libs.log
@@ -61,7 +61,7 @@ sudo echo "
  echo ""
  
  #Modify the /etc/sssd/sssd.conf file
-echo "Modifing the /etc/sssd/sssd.conf file"
+echo "Modifying the /etc/sssd/sssd.conf file"
 sudo echo "
 [sssd]
  services = nss, pam, ssh, autofs
@@ -96,7 +96,7 @@ sudo getent passwd contosoadmin
 echo ""
 
 #Modify the /etc/ssh/sshd_config file with PasswordAuthentication yes
-echo "Modifing the /etc/ssh/sshd_config file"
+echo "Modifying the /etc/ssh/sshd_config file"
 sudo sed -i -r 's/^(PasswordAuthentication (n|N)o|#PasswordAuthentication (n|N)o|#PasswordAuthentication yes)/PasswordAuthentication yes/' /etc/ssh/sshd_config
 echo "grep output from /etc/ssh/sshd_config file"
 sudo cat /etc/ssh/sshd_config | grep 'PasswordAuthentication yes'
@@ -108,7 +108,7 @@ sudo service sshd restart
 echo ""
 
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
-echo "Modifing the /etc/sudoers file"
+echo "Modifying the /etc/sudoers file"
 echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
 echo "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 echo "grep output from /etc/sudoers file"
