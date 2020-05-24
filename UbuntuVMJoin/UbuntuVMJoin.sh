@@ -2,6 +2,7 @@
 
 #This script is to join an Ubuntu VM to an AADDS managed instance as shown at:
 #https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-ubuntu-linux-vm
+#Author: Milton Halton
 
 #Get the domain name in a variable
 read -p "Please enter the managed instance domain name (Example: aaddscontoso.com): " domainName
