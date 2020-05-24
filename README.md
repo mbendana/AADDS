@@ -24,7 +24,7 @@ ntpdate\
 realmd\
 adcli
 
-STEPS:
+**STEPS:**
 1. On the Ubuntu VM, create a new .sh file with Nano or Vi(m). Examples:\
 nano ubuntu.sh\
 vi ubuntu.sh\
