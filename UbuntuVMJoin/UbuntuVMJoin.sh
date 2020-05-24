@@ -17,7 +17,7 @@ sudo echo ""
 #Install required components
 sudo echo "Installing required packages krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli"
 sudo apt-get update
-sudo apt-get install krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli
+sudo apt-get --assume-yes install krb5-user samba sssd sssd-tools libnss-sss libpam-sss ntp ntpdate realmd adcli
 sudo echo ""
 
 #Modify the /etc/ntp.conf file with server aaddscontoso.com
