@@ -1,7 +1,7 @@
-# [THE RHEL SCRIPTS HAVE NOT BEEN TESTED YET]
-
 These scripts are to join RHEL 7/6 VMs to an AADDS managed instance by automatically configuring everything found at:
 https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-rhel-linux-vm
+
+The scripts have been tested with RHEL 7.4 and 6.9 versions.
 
 As per the doc, the script makes modifications to the following files:\
 **On RHEL 7:**\
