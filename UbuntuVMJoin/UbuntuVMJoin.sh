@@ -9,7 +9,7 @@ echo ""
 
 #Modify /etc/hosts file with 127.0.0.1 ubuntu.aaddscontoso.com ubuntu
 echo "Modifing the /etc/hosts file"
-sudo sed -i -r "/^127.0.0.1 localhost/i 127.0.0.1 $( echo $(hostname).$domainName $(hostname) | tr '[:upper:]' '[:lower:]')" /etc/hosts
+sudo sed -i -r "/^127.0.0.1/i 127.0.0.1 $( echo $(hostname).$domainName $(hostname) | tr '[:upper:]' '[:lower:]')" /etc/hosts
 echo "grep output from /etc/hosts file"
 sudo cat /etc/hosts | grep 127.0.0.1
 echo ""
