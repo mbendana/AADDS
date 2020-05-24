@@ -4,7 +4,7 @@
 #https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-ubuntu-linux-vm
 
 #Get the domain name in a variable
-read -p "Please enter the managed instance domain name (Example: example.com): " domainName
+read -p "Please enter the managed instance domain name (Example: aaddscontoso.com): " domainName
 echo ""
 
 #Modify /etc/hosts file with 127.0.0.1 ubuntu.aaddscontoso.com ubuntu
