@@ -8,7 +8,7 @@ read -p "Please enter the managed instance domain name (Example: aaddscontoso.co
 echo ""
 
 #Modify /etc/hosts file with 127.0.0.1 centos.aaddscontoso.com centos
-echo "Modifing the /etc/hosts file"
+echo "Modifying the /etc/hosts file"
 sudo sed -i -r "/^127.0.0.1/i 127.0.0.1 $( echo $(hostname).$domainName $(hostname) | tr '[:upper:]' '[:lower:]')" /etc/hosts
 echo "grep output from /etc/hosts file"
 sudo cat /etc/hosts | grep 127.0.0.1
@@ -39,7 +39,7 @@ sudo realm join --verbose ${domainName^^} -U "$domainAdmin@${domainName^^}"
 echo ""
 
 #Modify the /etc/ssh/sshd_config file with PasswordAuthentication yes
-echo "Modifing the /etc/ssh/sshd_config file"
+echo "Modifying the /etc/ssh/sshd_config file"
 sudo sed -i -r 's/^(PasswordAuthentication (n|N)o|#PasswordAuthentication (n|N)o|#PasswordAuthentication yes)/PasswordAuthentication yes/' /etc/ssh/sshd_config
 echo "grep output from /etc/ssh/sshd_config file"
 sudo cat /etc/ssh/sshd_config | grep 'PasswordAuthentication yes'
@@ -51,7 +51,7 @@ sudo systemctl restart sshd
 echo ""
 
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
-echo "Modifing the /etc/sudoers file"
+echo "Modifying the /etc/sudoers file"
 echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
 echo "%AAD\ DC\ Administrators@$domainName ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 echo "grep output from /etc/sudoers file"
