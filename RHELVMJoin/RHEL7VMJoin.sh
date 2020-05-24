@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script is to join a RHEL VM to an AADDS managed instance as shown at:
+#This script is to join a RHEL 7 VM to an AADDS managed instance as shown at:
 #https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-rhel-linux-vm
 
 #Get the domain name in a variable
