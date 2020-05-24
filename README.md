@@ -1,46 +1,39 @@
-This script is to join an Ubuntu VM to an AADDS managed instance by automatically configuring everything found at:
-https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-ubuntu-linux-vm
-
-The script has been tested on Ubuntu 16.04.6 LTS and 18.04.4 LTS versions.
+These scripts are to join RHEL 7/6 VMs to an AADDS managed instance by automatically configuring everything found at:
+https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-rhel-linux-vm
 
 As per the doc, the script makes modifications to the following files:\
+On RHEL 7:\
 /etc/hosts\
-/etc/ntp.conf\
-/etc/krb5.conf\
-/etc/sssd/sssd.conf\
 /etc/ssh/sshd_config\
-/etc/pam.d/common-session\
 /etc/sudoers
 
 The script also installs the following required packages:\
-krb5-user\
-samba\
-sssd\
-sssd-tools\
-libnss-sss\
-libpam-sss\
-ntp\
-ntpdate\
+On RHEL 7:\
 realmd\
-adcli
+sssd\
+krb5-workstation\
+krb5-libs\
+oddjob\
+oddjob-mkhomedir\
+samba-common-tools
 
 STEPS:
-1. On the Ubuntu VM, create a new .sh file with Nano or Vi(m). Examples:\
-nano join.sh\
-vi join.sh\
-vim join.sh
+1. On the RHEL (7/6) VM, create a new .sh file with Nano or Vi(m). Examples:\
+nano rhel.sh\
+vi rhel.sh\
+vim rhel.sh
 
-2. Copy and paste the content of script UbuntuVMJoin.sh onto the newly created .sh file
+2. Copy and paste the content of script RHEL(7/6)VMJoin.sh onto the newly created .sh file
 
 3. Save the file:\
 If Nano: Ctrl + X > Yes > Enter\
 If Vi or Vim: Esc > :wq > Enter
 
 3. Make the file executable:\
-chmod +x join.sh
+chmod +x rhel.sh
 
 4. Run the file:\
-./join.sh
+./rhel.sh
 
 During script execution, prompts for entering the AAD DS managed instance domain name (Example: aaddscontoso.com) and the username of the admin user joining the VM to the managed instance (Example: admin) will appear.
 
