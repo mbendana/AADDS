@@ -34,13 +34,13 @@ sudo ntpdate $domainName
 sudo systemctl start ntp
 echo ""
 
+#Get the admin user who will join the VM to the managed instance
+read -p "Please enter the domain admin name (Example: admin): " domainAdmin
+echo ""
+
 #discover the realm
 echo "Discovering the realm"
 sudo realm discover ${domainName^^}
-echo ""
-
-#Get the admin user who will join the VM to the managed instance
-read -p "Please enter the domain admin name (Example: admin): " domainAdmin
 echo ""
 
 #Initialize the kinit process
