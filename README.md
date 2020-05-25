@@ -41,12 +41,12 @@ vim ubuntu.sh
 If Nano: Ctrl + X > Yes > Enter\
 If Vi or Vim: Esc > :wq > Enter
 
-3. Make the file executable:\
+3. Make the file executable:
 ```console
 chmod +x ubuntu.sh
 ```
 
-4. Run the file:\
+4. Run the file:
 ```console
 ./ubuntu.sh
 ```
