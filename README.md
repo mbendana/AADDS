@@ -37,9 +37,16 @@ krb5-workstation
 **STEPS:**
 1. On the RHEL (7/6) VM, create a new .sh file with Nano or Vi(m).\
 Examples:\
-nano rhel.sh\
-vi rhel.sh\
+
+``
+nano rhel.sh
+``\
+``
+vi rhel.sh
+``\
+``
 vim rhel.sh
+``
 
 2. Copy and paste the content of script RHEL(7/6)VMJoin.sh onto the newly created .sh file
 
@@ -48,10 +55,14 @@ If Nano: Ctrl + X > Yes > Enter\
 If Vi or Vim: Esc > :wq > Enter
 
 3. Make the file executable:\
+``
 chmod +x rhel.sh
+``
 
 4. Run the file:\
+``
 ./rhel.sh
+``
 
 During script execution, prompts for entering the AAD DS managed instance domain name (Example: aaddscontoso.com) and the username of the admin user joining the VM to the managed instance (Example: admin) will appear.
 
