@@ -37,7 +37,6 @@ krb5-workstation
 **STEPS:**
 1. On the RHEL (7/6) VM, create a new .sh file with Nano or Vi(m).\
 Examples:\
-
 ``
 nano rhel.sh
 ``\
