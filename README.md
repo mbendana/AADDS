@@ -1,6 +1,6 @@
 # [THIS SCRIPT HASN'T BEEN TESTED YET]
 
-These scripts are to join CentOS VMs to an AADDS managed instance by automatically configuring everything found at:
+This script is to join CentOS VMs to an AADDS managed instance by automatically configuring everything found at:
 https://docs.microsoft.com/en-us/azure/active-directory-domain-services/join-centos-linux-vm
 
 As per the doc, the script makes modifications to the following files:\
