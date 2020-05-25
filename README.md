@@ -22,9 +22,16 @@ samba-common-tools
 **STEPS:**
 1. On the CentOS VM, create a new .sh file with Nano or Vi(m).\
 Examples:\
-nano centos.sh\
-vi centos.sh\
+
+``
+nano centos.sh
+``\
+``
+vi centos.sh
+``\
+``
 vim centos.sh
+``
 
 2. Copy and paste the content of script CentOSVMJoin.sh onto the newly created .sh file
 
@@ -33,10 +40,14 @@ If Nano: Ctrl + X > Yes > Enter\
 If Vi or Vim: Esc > :wq > Enter
 
 3. Make the file executable:\
+``
 chmod +x centos.sh
+``
 
 4. Run the file:\
+``
 ./centos.sh
+``
 
 During script execution, prompts for entering the AAD DS managed instance domain name (Example: aaddscontoso.com) and the username of the admin user joining the VM to the managed instance (Example: admin) will appear.
 
