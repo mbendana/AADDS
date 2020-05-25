@@ -22,7 +22,6 @@ samba-common-tools
 **STEPS:**
 1. On the CentOS VM, create a new .sh file with Nano or Vi(m).\
 Examples:\
-
 ``
 nano centos.sh
 ``\
