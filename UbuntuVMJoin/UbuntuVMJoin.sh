@@ -12,7 +12,7 @@ echo ""
 echo "Modifying the /etc/hosts file"
 sudo sed -i -r "/^127.0.0.1/i 127.0.0.1 $( echo $(hostname).$domainName $(hostname) | tr '[:upper:]' '[:lower:]')" /etc/hosts
 echo "grep output from /etc/hosts file"
-sudo cat /etc/hosts | grep 127.0.0.1
+sudo cat /etc/hosts | grep -i "127.0.0.1 $(hostname).$domainName $(hostname)"
 echo ""
 
 #Install required components
@@ -25,7 +25,7 @@ echo ""
 echo "Modifying the /etc/ntp.conf file"
 sudo sed -i -r "1 i server $domainName" /etc/ntp.conf
 echo "grep output from /etc/ntp.conf file"
-sudo cat /etc/ntp.conf | grep server
+sudo cat /etc/ntp.conf | grep -i "server $domainName"
 echo ""
 
 #Stop, update and start the ntp service
@@ -58,14 +58,18 @@ echo ""
 echo "Modifying the /etc/krb5.conf file"
 sudo sed -i -r "/default_realm/a \\\trdns=false" /etc/krb5.conf
 echo "grep output from /etc/krb5.conf file"
-sudo cat /etc/krb5.conf | grep rdns
+sudo cat /etc/krb5.conf | grep -i "rdns=false"
+echo ""
+
+echo "Starting the sssd service"
+sudo service sssd start
 echo ""
 
 #Modify the /etc/sssd/sssd.conf file with # use_fully_qualified_names = True
 echo "Modifying the /etc/sssd/sssd.conf file"
 sudo sed -i -r 's/use_fully_qualified_names = True/#use_fully_qualified_names = True/' /etc/sssd/sssd.conf
 echo "grep output from /etc/sssd/sssd.conf file"
-sudo cat /etc/sssd/sssd.conf | grep use_fully_qualified_names
+sudo cat /etc/sssd/sssd.conf | grep -i "use_fully_qualified_names"
 echo ""
 
 #Restart the sssd service
@@ -77,7 +81,7 @@ echo ""
 echo "Modifying the /etc/ssh/sshd_config file"
 sudo sed -i -r 's/^(PasswordAuthentication (n|N)o|#PasswordAuthentication (n|N)o|#PasswordAuthentication yes)/PasswordAuthentication yes/' /etc/ssh/sshd_config
 echo "grep output from /etc/ssh/sshd_config file"
-sudo cat /etc/ssh/sshd_config | grep 'PasswordAuthentication yes'
+sudo cat /etc/ssh/sshd_config | grep -i "PasswordAuthentication yes"
 echo ""
 
 #Restart the ssh service
@@ -89,7 +93,7 @@ echo ""
 echo "Modifying the /etc/pam.d/common-session file"
 sudo sed -i -r '/pam_sss.so/a session required pam_mkhomedir.so skel=/etc/skel/ umask=0077' /etc/pam.d/common-session
 echo "grep output from /etc/pam.d/common-session file"
-sudo cat /etc/pam.d/common-session | grep 'session required pam_mkhomedir.so skel=/etc/skel/ umask=0077'
+sudo cat /etc/pam.d/common-session | grep -i "session required pam_mkhomedir.so skel=/etc/skel/ umask=0077"
 echo ""
 
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
@@ -97,7 +101,7 @@ echo "Modifying the /etc/sudoers file"
 echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
 echo "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 echo "grep output from /etc/sudoers file"
-sudo cat /etc/sudoers | grep 'AAD[\] DC[\] Administrators'
+sudo cat /etc/sudoers | grep -i "AAD[\] DC[\] Administrators"
 echo ""
 
 #Sign in with the domain admin user
