@@ -67,7 +67,7 @@ echo ""
 
 #Modify the /etc/sssd/sssd.conf file with # use_fully_qualified_names = True
 echo "Modifying the /etc/sssd/sssd.conf file"
-sudo sed -i -r 's/use_fully_qualified_names = True/#use_fully_qualified_names = True/' /etc/sssd/sssd.conf
+sudo sed -i -r 's/^use_fully_qualified_names = True/#use_fully_qualified_names = True/' /etc/sssd/sssd.conf
 echo "grep output from /etc/sssd/sssd.conf file"
 sudo cat /etc/sssd/sssd.conf | grep -i "use_fully_qualified_names"
 echo ""
