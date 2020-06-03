@@ -29,7 +29,9 @@ else
 fi
 
 #Install required components
+echo "====================="
 echo "Installing required packages realmd sssd krb5-workstation krb5-libs oddjob oddjob-mkhomedir samba-common-tools"
+echo "====================="
 sudo yum -y install realmd sssd krb5-workstation krb5-libs oddjob oddjob-mkhomedir samba-common-tools
 echo ""
 
@@ -38,17 +40,23 @@ read -p "Please enter the domain admin name (Example: admin): " domainAdmin
 echo ""
 
 #discover the realm
+echo "====================="
 echo "Discovering the realm"
+echo "====================="
 sudo realm discover ${domainName^^}
 echo ""
 
 #Initialize the kinit process
+echo "====================="
 echo "Starting the kinit process"
+echo "====================="
 kinit $domainAdmin@${domainName^^}
 echo ""
 
 #Join the VM
+echo "====================="
 echo "Joining the VM to the AAD DS managed instance"
+echo "====================="
 sudo realm join --verbose ${domainName^^} -U "$domainAdmin@${domainName^^}"
 echo ""
 
@@ -73,7 +81,9 @@ else
 fi
 
 #Restart the ssh service
+echo "====================="
 echo "Restarting the ssh service"
+echo "====================="
 sudo systemctl restart sshd
 echo ""
 
@@ -99,6 +109,8 @@ else
 fi
 
 #Sign in with the domain admin user
+echo "====================="
 echo "Signing with the domain admin user"
+echo "====================="
 ssh -l $domainAdmin@$domainName $(hostname).$domainName
 echo ""
