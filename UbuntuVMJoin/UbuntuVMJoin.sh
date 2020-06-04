@@ -135,14 +135,13 @@ else
         echo "====================="
         sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
         echo ""
+		#Restart the sssd service
+		echo "====================="
+		echo "Restarting the sssd service"
+		echo "====================="
+		sudo service sssd restart
+		echo ""
 fi
-
-#Restart the sssd service
-echo "====================="
-echo "Restarting the sssd service"
-echo "====================="
-sudo service sssd restart
-echo ""
 
 #Modify the /etc/ssh/sshd_config file with PasswordAuthentication yes
 sshdFile="PasswordAuthentication yes"
@@ -162,14 +161,13 @@ else
         echo "====================="
         sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
         echo ""
+		#Restart the ssh service
+		echo "====================="
+		echo "Restarting the ssh service"
+		echo "====================="
+		sudo systemctl restart ssh
+		echo ""
 fi
-
-#Restart the ssh service
-echo "====================="
-echo "Restarting the ssh service"
-echo "====================="
-sudo systemctl restart ssh
-echo ""
 
 #Modify the /etc/pam.d/common-session file with session required pam_mkhomedir.so skel=/etc/skel/ umask=0077
 pamFile="session required pam_mkhomedir.so skel=/etc/skel/ umask=0077"
