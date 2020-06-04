@@ -15,14 +15,14 @@ grepHostsFile=`sudo cat /etc/hosts | grep "$hostsFile"`
 if [[ "$grepHostsFile" == *"$hostsFile"* ]]
 then
 	echo "====================="
-	echo "hosts file already contains entry"
+	echo "/etc/hosts file already contains entry"
 	echo "====================="
 	sudo cat /etc/hosts | grep "$hostsFile" --color=always
 	echo ""
 else
-	sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
+	sudo sed -i -r "1 i $hostsFile" /etc/hosts
 	echo "====================="
-	echo "Modified hosts file"
+	echo "Modified /etc/hosts file"
 	echo "====================="
 	sudo cat /etc/hosts | grep "$hostsFile" --color=always
 	echo ""
@@ -43,14 +43,14 @@ grepNtpFile=`sudo cat /etc/ntp.conf | grep "$ntpFile"`
 if [[ "$grepNtpFile" == *"$ntpFile"* ]]
 then
 	echo "====================="
-	echo "ntp.conf file already contains entry"
+	echo "/etc/ntp.conf file already contains entry"
 	echo "====================="
 	sudo cat /etc/ntp.conf | grep "$ntpFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "1 i $ntpFile" /etc/ntp.conf
 	echo "====================="
-	echo "Modified ntp.conf file"
+	echo "Modified /etc/ntp.conf file"
 	echo "====================="
 	sudo cat /etc/ntp.conf | grep "$ntpFile" --color=always
 	echo ""
@@ -97,14 +97,14 @@ grepKrbFile=`sudo cat /etc/krb5.conf | grep "$krbFile"`
 if [[ "$grepKrbFile" == *"$krbFile"* ]]
 then
 	echo "====================="
-	echo "krb5.conf file already contains entry"
+	echo "/etc/krb5.conf file already contains entry"
 	echo "====================="
 	sudo cat /etc/krb5.conf | grep "$krbFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "/default_realm/a \\\t$krbFile" /etc/krb5.conf
 	echo "====================="
-	echo "Modified krb5.conf file"
+	echo "Modified /etc/krb5.conf file"
 	echo "====================="
 	sudo cat /etc/krb5.conf | grep "$krbFile" --color=always
 	echo ""
@@ -124,14 +124,14 @@ grepSssdFile=`sudo cat /etc/sssd/sssd.conf | grep "$sssdFile"`
 if [[ "$grepSssdFile" == *"$sssdFile"* ]]
 then
 	echo "====================="
-	echo "sssd.conf file already contains entry"
+	echo "/etc/sssd/sssd.conf file already contains entry"
 	echo "====================="
 	sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "s/^use_fully_qualified_names = True/$sssdFile/" /etc/sssd/sssd.conf
 	echo "====================="
-	echo "Modified sssd.conf file"
+	echo "Modified /etc/sssd/sssd.conf file"
 	echo "====================="
 	sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
 	echo ""
@@ -150,14 +150,14 @@ grepSshdFile=`sudo cat /etc/ssh/sshd_config | grep "$sshdFile"`
 if [[ "$grepSshdFile" == *"$sshdFile"* ]]
 then
 	echo "====================="
-	echo "sshd_config file already contains entry"
+	echo "/etc/ssh/sshd_config file already contains entry"
 	echo "====================="
 	sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "s/^(#|)PasswordAuthentication ((n|N)o|yes)/$sshdFile/" /etc/ssh/sshd_config
 	echo "====================="
-	echo "Modified sshd_config file"
+	echo "Modified /etc/ssh/sshd_config file"
 	echo "====================="
 	sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
 	echo ""
@@ -176,14 +176,14 @@ grepPamFile=`sudo cat /etc/pam.d/common-session | grep "$pamFile"`
 if [[ "$grepPamFile" == *"$pamFile"* ]]
 then
 	echo "====================="
-	echo "common-session file already contains entry"
+	echo "/etc/pam.d/common-session file already contains entry"
 	echo "====================="
 	sudo cat /etc/pam.d/common-session | grep "$pamFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "/pam_sss.so/a $pamFile" /etc/pam.d/common-session
 	echo "====================="
-	echo "Modified common-session  file"
+	echo "Modified /etc/pam.d/common-session  file"
 	echo "====================="
 	sudo cat /etc/pam.d/common-session| grep "$pamFile" --color=always
 	echo ""
@@ -196,7 +196,7 @@ grepSudoersFile=`sudo cat /etc/sudoers | grep -F "$sudoersFile"`
 if [[ "$grepSudoersFile" == *"$sudoersFile"* ]]
 then
 	echo "====================="
-	echo "sudoers file already contains entry"
+	echo "/etc/sudoers file already contains entry"
 	echo "====================="
 	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
 	echo ""
@@ -204,7 +204,7 @@ else
 	echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
 	echo "$sudoersFile" | sudo tee -a /etc/sudoers
 	echo "====================="
-	echo "Modified sudoers file"
+	echo "Modified /etc/sudoers file"
 	echo "====================="
 	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
 	echo ""
