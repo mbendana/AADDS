@@ -78,12 +78,12 @@ else
         echo "====================="
         sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
         echo ""
-#Restart the ssh service
-echo "====================="
-echo "Restarting the ssh service"
-echo "====================="
-sudo systemctl restart sshd
-echo ""
+		#Restart the ssh service
+		echo "====================="
+		echo "Restarting the ssh service"
+		echo "====================="
+		sudo systemctl restart sshd
+		echo ""
 fi
 
 
