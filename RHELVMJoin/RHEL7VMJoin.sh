@@ -72,7 +72,7 @@ then
 	sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
 	echo ""
 else
-	sudo sed -i -r "s/^(PasswordAuthentication (n|N)o|#PasswordAuthentication (n|N)o|#PasswordAuthentication yes)/$sshFile/" /etc/ssh/sshd_config
+	sudo sed -i -r "s/^(#|)PasswordAuthentication ((n|N)o|yes)/$sshdFile/" /etc/ssh/sshd_config
 	echo "====================="
 	echo "Modified ssh file"
 	echo "====================="
