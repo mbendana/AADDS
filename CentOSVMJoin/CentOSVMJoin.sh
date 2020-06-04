@@ -20,7 +20,7 @@ then
 	sudo cat /etc/hosts | grep "$hostsFile" --color=always
 	echo ""
 else
-	sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
+	sudo sed -i -r "1 i $hostsFile" /etc/hosts
 	echo "====================="
 	echo "Modified /etc/hosts file"
 	echo "====================="
