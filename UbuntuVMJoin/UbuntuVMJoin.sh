@@ -213,6 +213,8 @@ else
 fi
 
 #Sign in with the domain admin user
+echo "====================="
 echo "Signing with the domain admin user"
+echo "====================="
 ssh -l $domainAdmin@$domainName $(hostname).$domainName
 echo ""
