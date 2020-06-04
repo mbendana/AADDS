@@ -14,18 +14,18 @@ grepHostsFile=`sudo cat /etc/hosts | grep "$hostsFile"`
 #Checking hosts file
 if [[ "$grepHostsFile" == *"$hostsFile"* ]]
 then
-        echo "====================="
-        echo "hosts file already contains entry"
-        echo "====================="
-        sudo cat /etc/hosts | grep "$hostsFile" --color=always
-        echo ""
+	echo "====================="
+	echo "hosts file already contains entry"
+	echo "====================="
+	sudo cat /etc/hosts | grep "$hostsFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
-        echo "====================="
-        echo "Modified hosts file"
-        echo "====================="
-        sudo cat /etc/hosts | grep "$hostsFile" --color=always
-        echo ""
+	sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
+	echo "====================="
+	echo "Modified hosts file"
+	echo "====================="
+	sudo cat /etc/hosts | grep "$hostsFile" --color=always
+	echo ""
 fi
 
 #Install required components
@@ -66,24 +66,24 @@ grepSshFile=`sudo cat /etc/ssh/sshd_config | grep "^$sshFile"`
 #Checking sshd_config file
 if [[ "$grepSshFile" == *"$sshFile"* ]]
 then
-        echo "====================="
-        echo "ssh file already contains entry"
-        echo "====================="
-        sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
-        echo ""
+	echo "====================="
+	echo "ssh file already contains entry"
+	echo "====================="
+	sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "s/^(PasswordAuthentication (n|N)o|#PasswordAuthentication (n|N)o|#PasswordAuthentication yes)/$sshFile/" /etc/ssh/sshd_config
-        echo "====================="
-        echo "Modified ssh file"
-        echo "====================="
-        sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
-        echo ""
-		#Restart the ssh service
-		echo "====================="
-		echo "Restarting the ssh service"
-		echo "====================="
-		sudo systemctl restart sshd
-		echo ""
+	sudo sed -i -r "s/^(PasswordAuthentication (n|N)o|#PasswordAuthentication (n|N)o|#PasswordAuthentication yes)/$sshFile/" /etc/ssh/sshd_config
+	echo "====================="
+	echo "Modified ssh file"
+	echo "====================="
+	sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
+	echo ""
+	#Restart the ssh service
+	echo "====================="
+	echo "Restarting the ssh service"
+	echo "====================="
+	sudo systemctl restart sshd
+	echo ""
 fi
 
 
@@ -95,19 +95,19 @@ grepSudoersFile=`sudo cat /etc/sudoers | grep -F "$sudoersFile"`
 #Checking sudoers file
 if [[ "$grepSudoersFile" == *"$sudoersFile"* ]]
 then
-        echo "====================="
-        echo "sudoers file already contains entry"
-        echo "====================="
-        sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
-        echo ""
+	echo "====================="
+	echo "sudoers file already contains entry"
+	echo "====================="
+	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
+	echo ""
 else
-        echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
-        echo "$sudoersFile" | sudo tee -a /etc/sudoers
-        echo "====================="
-        echo "Modified sudoers file"
-        echo "====================="
-        sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
-        echo ""
+	echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
+	echo "$sudoersFile" | sudo tee -a /etc/sudoers
+	echo "====================="
+	echo "Modified sudoers file"
+	echo "====================="
+	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
+	echo ""
 fi
 
 #Sign in with the domain admin user
