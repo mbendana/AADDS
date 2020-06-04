@@ -15,14 +15,14 @@ grepHostsFile=`sudo cat /etc/hosts | grep "$hostsFile"`
 if [[ "$grepHostsFile" == *"$hostsFile"* ]]
 then
         echo "====================="
-        echo "host file already contains entry"
+        echo "hosts file already contains entry"
         echo "====================="
         sudo cat /etc/hosts | grep "$hostsFile" --color=always
         echo ""
 else
         sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
         echo "====================="
-        echo "Modified host file"
+        echo "Modified hosts file"
         echo "====================="
         sudo cat /etc/hosts | grep "$hostsFile" --color=always
         echo ""
