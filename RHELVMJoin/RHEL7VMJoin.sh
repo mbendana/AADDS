@@ -15,14 +15,14 @@ grepHostsFile=`sudo cat /etc/hosts | grep "$hostsFile"`
 if [[ "$grepHostsFile" == *"$hostsFile"* ]]
 then
 	echo "====================="
-	echo "host file already contains entry"
+	echo "/etc/hosts file already contains entry"
 	echo "====================="
 	sudo cat /etc/hosts | grep "$hostsFile" --color=always
 	echo ""
 else
-	sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
+	sudo sed -i -r "1 i $hostsFile" /etc/hosts
 	echo "====================="
-	echo "Modified host file"
+	echo "Modified /etc/hosts file"
 	echo "====================="
 	sudo cat /etc/hosts | grep "$hostsFile" --color=always
 	echo ""
@@ -67,14 +67,14 @@ grepSshFile=`sudo cat /etc/ssh/sshd_config | grep "^$sshFile"`
 if [[ "$grepSshFile" == *"$sshFile"* ]]
 then
 	echo "====================="
-	echo "ssh file already contains entry"
+	echo "/etc/ssh/sshd_config file already contains entry"
 	echo "====================="
 	sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "s/^(#|)PasswordAuthentication ((n|N)o|yes)/$sshdFile/" /etc/ssh/sshd_config
 	echo "====================="
-	echo "Modified ssh file"
+	echo "Modified /etc/ssh/sshd_config file"
 	echo "====================="
 	sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
 	echo ""
@@ -93,7 +93,7 @@ grepSudoersFile=`sudo cat /etc/sudoers | grep -F "$sudoersFile"`
 if [[ "$grepSudoersFile" == *"$sudoersFile"* ]]
 then
 	echo "====================="
-	echo "sudoers file already contains entry"
+	echo "/etc/sudoers file already contains entry"
 	echo "====================="
 	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
 	echo ""
@@ -101,7 +101,7 @@ else
 	echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
 	echo "$sudoersFile" | sudo tee -a /etc/sudoers
 	echo "====================="
-	echo "Modified sudoers file"
+	echo "Modified /etc/sudoers file"
 	echo "====================="
 	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
 	echo ""
