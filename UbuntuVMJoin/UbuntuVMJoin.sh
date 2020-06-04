@@ -14,18 +14,18 @@ grepHostsFile=`sudo cat /etc/hosts | grep "$hostsFile"`
 #Checking hosts file
 if [[ "$grepHostsFile" == *"$hostsFile"* ]]
 then
-        echo "====================="
-        echo "hosts file already contains entry"
-        echo "====================="
-        sudo cat /etc/hosts | grep "$hostsFile" --color=always
-        echo ""
+	echo "====================="
+	echo "hosts file already contains entry"
+	echo "====================="
+	sudo cat /etc/hosts | grep "$hostsFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
-        echo "====================="
-        echo "Modified hosts file"
-        echo "====================="
-        sudo cat /etc/hosts | grep "$hostsFile" --color=always
-        echo ""
+	sudo sed -i -r "/^127.0.0.1/i $hostsFile" /etc/hosts
+	echo "====================="
+	echo "Modified hosts file"
+	echo "====================="
+	sudo cat /etc/hosts | grep "$hostsFile" --color=always
+	echo ""
 fi
 
 #Install required components
@@ -42,18 +42,18 @@ grepNtpFile=`sudo cat /etc/ntp.conf | grep "$ntpFile"`
 #Checking ntp.conf file
 if [[ "$grepNtpFile" == *"$ntpFile"* ]]
 then
-        echo "====================="
-        echo "ntp.conf file already contains entry"
-        echo "====================="
-        sudo cat /etc/ntp.conf | grep "$ntpFile" --color=always
-        echo ""
+	echo "====================="
+	echo "ntp.conf file already contains entry"
+	echo "====================="
+	sudo cat /etc/ntp.conf | grep "$ntpFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "1 i $ntpFile" /etc/ntp.conf
-        echo "====================="
-        echo "Modified ntp.conf file"
-        echo "====================="
-        sudo cat /etc/ntp.conf | grep "$ntpFile" --color=always
-        echo ""
+	sudo sed -i -r "1 i $ntpFile" /etc/ntp.conf
+	echo "====================="
+	echo "Modified ntp.conf file"
+	echo "====================="
+	sudo cat /etc/ntp.conf | grep "$ntpFile" --color=always
+	echo ""
 fi
 
 #Stop, update and start the ntp service
@@ -96,18 +96,18 @@ grepKrbFile=`sudo cat /etc/krb5.conf | grep "$krbFile"`
 #Checking ntp.conf file
 if [[ "$grepKrbFile" == *"$krbFile"* ]]
 then
-        echo "====================="
-        echo "krb5.conf file already contains entry"
-        echo "====================="
-        sudo cat /etc/krb5.conf | grep "$krbFile" --color=always
-        echo ""
+	echo "====================="
+	echo "krb5.conf file already contains entry"
+	echo "====================="
+	sudo cat /etc/krb5.conf | grep "$krbFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "/default_realm/a \\\t$krbFile" /etc/krb5.conf
-        echo "====================="
-        echo "Modified krb5.conf file"
-        echo "====================="
-        sudo cat /etc/krb5.conf | grep "$krbFile" --color=always
-        echo ""
+	sudo sed -i -r "/default_realm/a \\\t$krbFile" /etc/krb5.conf
+	echo "====================="
+	echo "Modified krb5.conf file"
+	echo "====================="
+	sudo cat /etc/krb5.conf | grep "$krbFile" --color=always
+	echo ""
 fi
 
 #Start the sssd service
@@ -123,24 +123,24 @@ grepSssdFile=`sudo cat /etc/sssd/sssd.conf | grep "$sssdFile"`
 #Checking ntp.conf file
 if [[ "$grepSssdFile" == *"$sssdFile"* ]]
 then
-        echo "====================="
-        echo "sssd.conf file already contains entry"
-        echo "====================="
-        sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
-        echo ""
+	echo "====================="
+	echo "sssd.conf file already contains entry"
+	echo "====================="
+	sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "s/^use_fully_qualified_names = True/$sssdFile/" /etc/sssd/sssd.conf
-        echo "====================="
-        echo "Modified sssd.conf file"
-        echo "====================="
-        sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
-        echo ""
-		#Restart the sssd service
-		echo "====================="
-		echo "Restarting the sssd service"
-		echo "====================="
-		sudo service sssd restart
-		echo ""
+	sudo sed -i -r "s/^use_fully_qualified_names = True/$sssdFile/" /etc/sssd/sssd.conf
+	echo "====================="
+	echo "Modified sssd.conf file"
+	echo "====================="
+	sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
+	echo ""
+	#Restart the sssd service
+	echo "====================="
+	echo "Restarting the sssd service"
+	echo "====================="
+	sudo service sssd restart
+	echo ""
 fi
 
 #Modify the /etc/ssh/sshd_config file with PasswordAuthentication yes
@@ -149,24 +149,24 @@ grepSshdFile=`sudo cat /etc/ssh/sshd_config | grep "$sshdFile"`
 #Checking ntp.conf file
 if [[ "$grepSshdFile" == *"$sshdFile"* ]]
 then
-        echo "====================="
-        echo "sshd_config file already contains entry"
-        echo "====================="
-        sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
-        echo ""
+	echo "====================="
+	echo "sshd_config file already contains entry"
+	echo "====================="
+	sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "s/^(#|)PasswordAuthentication ((n|N)o|yes)/$sshdFile/" /etc/ssh/sshd_config
-        echo "====================="
-        echo "Modified sshd_config file"
-        echo "====================="
-        sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
-        echo ""
-		#Restart the ssh service
-		echo "====================="
-		echo "Restarting the ssh service"
-		echo "====================="
-		sudo systemctl restart ssh
-		echo ""
+	sudo sed -i -r "s/^(#|)PasswordAuthentication ((n|N)o|yes)/$sshdFile/" /etc/ssh/sshd_config
+	echo "====================="
+	echo "Modified sshd_config file"
+	echo "====================="
+	sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
+	echo ""
+	#Restart the ssh service
+	echo "====================="
+	echo "Restarting the ssh service"
+	echo "====================="
+	sudo systemctl restart ssh
+	echo ""
 fi
 
 #Modify the /etc/pam.d/common-session file with session required pam_mkhomedir.so skel=/etc/skel/ umask=0077
@@ -175,18 +175,18 @@ grepPamFile=`sudo cat /etc/pam.d/common-session | grep "$pamFile"`
 #Checking ntp.conf file
 if [[ "$grepPamFile" == *"$pamFile"* ]]
 then
-        echo "====================="
-        echo "common-session file already contains entry"
-        echo "====================="
-        sudo cat /etc/pam.d/common-session | grep "$pamFile" --color=always
-        echo ""
+	echo "====================="
+	echo "common-session file already contains entry"
+	echo "====================="
+	sudo cat /etc/pam.d/common-session | grep "$pamFile" --color=always
+	echo ""
 else
-        sudo sed -i -r "/pam_sss.so/a $pamFile" /etc/pam.d/common-session
-        echo "====================="
-        echo "Modified common-session  file"
-        echo "====================="
-        sudo cat /etc/pam.d/common-session| grep "$pamFile" --color=always
-        echo ""
+	sudo sed -i -r "/pam_sss.so/a $pamFile" /etc/pam.d/common-session
+	echo "====================="
+	echo "Modified common-session  file"
+	echo "====================="
+	sudo cat /etc/pam.d/common-session| grep "$pamFile" --color=always
+	echo ""
 fi
 
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
@@ -195,19 +195,19 @@ grepSudoersFile=`sudo cat /etc/sudoers | grep -F "$sudoersFile"`
 #Checking sudoers file
 if [[ "$grepSudoersFile" == *"$sudoersFile"* ]]
 then
-        echo "====================="
-        echo "sudoers file already contains entry"
-        echo "====================="
-        sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
-        echo ""
+	echo "====================="
+	echo "sudoers file already contains entry"
+	echo "====================="
+	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
+	echo ""
 else
-        echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
-        echo "$sudoersFile" | sudo tee -a /etc/sudoers
-        echo "====================="
-        echo "Modified sudoers file"
-        echo "====================="
-        sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
-        echo ""
+	echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
+	echo "$sudoersFile" | sudo tee -a /etc/sudoers
+	echo "====================="
+	echo "Modified sudoers file"
+	echo "====================="
+	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
+	echo ""
 fi
 
 #Sign in with the domain admin user
