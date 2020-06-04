@@ -78,14 +78,15 @@ else
         echo "====================="
         sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
         echo ""
+		#Restart the ssh service
+		echo "====================="
+		echo "Restarting the ssh service"
+		echo "====================="
+		sudo systemctl restart sshd
+		echo ""
 fi
 
-#Restart the ssh service
-echo "====================="
-echo "Restarting the ssh service"
-echo "====================="
-sudo systemctl restart sshd
-echo ""
+
 
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
 sudoersFile="%AAD\ DC\ Administrators@$domainName ALL=(ALL) NOPASSWD:ALL"
