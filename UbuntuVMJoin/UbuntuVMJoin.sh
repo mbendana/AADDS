@@ -133,7 +133,7 @@ else
 	echo "====================="
 	echo "Modified /etc/sssd/sssd.conf file"
 	echo "====================="
-	sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
+	sudo cat /etc/sssd/sssd.conf | grep "#$sssdFile" --color=always
 	echo ""
 	#Restart the sssd service
 	echo "====================="
