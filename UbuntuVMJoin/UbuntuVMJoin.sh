@@ -118,8 +118,8 @@ sudo service sssd start
 echo ""
 
 #Modify the /etc/sssd/sssd.conf file with # use_fully_qualified_names = True
-sssdFile="#use_fully_qualified_names = True"
-grepSssdFile=`sudo cat /etc/sssd/sssd.conf | grep "$sssdFile"`
+sssdFile="use_fully_qualified_names = True"
+grepSssdFile=`sudo cat /etc/sssd/sssd.conf | grep "^#.*$sssdFile"`
 #Checking ntp.conf file
 if [[ "$grepSssdFile" == *"$sssdFile"* ]]
 then
@@ -129,7 +129,7 @@ then
 	sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
 	echo ""
 else
-	sudo sed -i -r "s/^use_fully_qualified_names = True/$sssdFile/" /etc/sssd/sssd.conf
+	sudo sed -i -r "s/use_fully_qualified_names = True/#$sssdFile/" /etc/sssd/sssd.conf
 	echo "====================="
 	echo "Modified /etc/sssd/sssd.conf file"
 	echo "====================="
@@ -145,7 +145,7 @@ fi
 
 #Modify the /etc/ssh/sshd_config file with PasswordAuthentication yes
 sshdFile="PasswordAuthentication yes"
-grepSshdFile=`sudo cat /etc/ssh/sshd_config | grep "$sshdFile"`
+grepSshdFile=`sudo cat /etc/ssh/sshd_config | grep "^$sshdFile"`
 #Checking ntp.conf file
 if [[ "$grepSshdFile" == *"$sshdFile"* ]]
 then
