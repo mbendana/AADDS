@@ -17,7 +17,7 @@ then
 	echo "====================="
 	echo "/etc/hosts file already contains entry"
 	echo "====================="
-	sudo cat /etc/hosts | grep "$hostsFile" --color=always
+	sudo cat /etc/hosts | grep "$grepHostsFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "1 i $hostsFile" /etc/hosts
@@ -45,7 +45,7 @@ then
 	echo "====================="
 	echo "/etc/ntp.conf file already contains entry"
 	echo "====================="
-	sudo cat /etc/ntp.conf | grep "$ntpFile" --color=always
+	sudo cat /etc/ntp.conf | grep "$grepNtpFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "1 i $ntpFile" /etc/ntp.conf
@@ -99,7 +99,7 @@ then
 	echo "====================="
 	echo "/etc/krb5.conf file already contains entry"
 	echo "====================="
-	sudo cat /etc/krb5.conf | grep "$krbFile" --color=always
+	sudo cat /etc/krb5.conf | grep "$grepKrbFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "/default_realm/a \\\t$krbFile" /etc/krb5.conf
@@ -126,7 +126,7 @@ then
 	echo "====================="
 	echo "/etc/sssd/sssd.conf file already contains entry"
 	echo "====================="
-	sudo cat /etc/sssd/sssd.conf | grep "$sssdFile" --color=always
+	sudo cat /etc/sssd/sssd.conf | grep "$grepSssdFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "s/use_fully_qualified_names = True/#$sssdFile/" /etc/sssd/sssd.conf
@@ -152,7 +152,7 @@ then
 	echo "====================="
 	echo "/etc/ssh/sshd_config file already contains entry"
 	echo "====================="
-	sudo cat /etc/ssh/sshd_config | grep "$sshdFile" --color=always
+	sudo cat /etc/ssh/sshd_config | grep "$grepSshdFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "s/^(#|)PasswordAuthentication ((n|N)o|yes)/$sshdFile/" /etc/ssh/sshd_config
@@ -178,7 +178,7 @@ then
 	echo "====================="
 	echo "/etc/pam.d/common-session file already contains entry"
 	echo "====================="
-	sudo cat /etc/pam.d/common-session | grep "$pamFile" --color=always
+	sudo cat /etc/pam.d/common-session | grep "$grepPamFile" --color=always
 	echo ""
 else
 	sudo sed -i -r "/pam_sss.so/a $pamFile" /etc/pam.d/common-session
@@ -198,7 +198,7 @@ then
 	echo "====================="
 	echo "/etc/sudoers file already contains entry"
 	echo "====================="
-	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
+	sudo cat /etc/sudoers | grep -F "$grepSudoersFile" --color=always
 	echo ""
 else
 	echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
