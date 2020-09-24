@@ -20,7 +20,6 @@ env:
   AZURE_WEBAPP_NAME: mb-github    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '10.x'                # set this to the node version to use
-  credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
 jobs:
   build-and-deploy:
@@ -43,5 +42,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.Publich_Profile }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
