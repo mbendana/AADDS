@@ -34,12 +34,12 @@ vim centos.sh
 If Nano: Ctrl + X > Yes > Enter\
 If Vi or Vim: Esc > :wq > Enter
 
-3. Make the file executable:
+4. Make the file executable:
 ```console
 chmod +x centos.sh
 ```
 
-4. Run the file:
+5. Run the file:
 ```console
 ./centos.sh
 ```
