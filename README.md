@@ -49,12 +49,12 @@ vim rhel.sh
 If Nano: Ctrl + X > Yes > Enter\
 If Vi or Vim: Esc > :wq > Enter
 
-3. Make the file executable:
+4. Make the file executable:
 ```console
 chmod +x rhel.sh
 ```
 
-4. Run the file:
+5. Run the file:
 ```console
 ./rhel.sh
 ```
