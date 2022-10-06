@@ -10,21 +10,21 @@ echo ""
 
 #Modify /etc/hosts file with 127.0.0.1 rhel rhel.aaddscontoso.com
 hostsFile="127.0.0.1 $( echo $(hostname) $(hostname).$domainName | tr '[:upper:]' '[:lower:]')"
-grepHostsFile=`sudo cat /etc/hosts | grep "$hostsFile"`
+grepHostsFile=`sudo grep "$hostsFile" /etc/hosts`
 #Checking hosts file
 if [[ "$grepHostsFile" == *"$hostsFile"* ]]
 then
 	echo "====================="
 	echo "/etc/hosts file already contains entry"
 	echo "====================="
-	sudo cat /etc/hosts | grep "$hostsFile" --color=always
+	sudo grep --color=always "$hostsFile" /etc/hosts
 	echo ""
 else
 	sudo sed -i -r "1 i $hostsFile" /etc/hosts
 	echo "====================="
 	echo "Modified /etc/hosts file"
 	echo "====================="
-	sudo cat /etc/hosts | grep "$hostsFile" --color=always
+	sudo grep --color=always "$hostsFile" /etc/hosts
 	echo ""
 fi
 
@@ -129,21 +129,21 @@ echo ""
 
 #Modify the /etc/ssh/sshd_config file with PasswordAuthentication yes
 sshFile="PasswordAuthentication yes"
-grepSshFile=`sudo cat /etc/ssh/sshd_config | grep "^$sshFile"`
+grepSshFile=`sudo grep "^$sshFile" /etc/ssh/sshd_config`
 #Checking sshd_config file
 if [[ "$grepSshFile" == *"$sshFile"* ]]
 then
 	echo "====================="
 	echo "/etc/ssh/sshd_config file already contains entry"
 	echo "====================="
-	sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
+	sudo grep --color=always "$sshFile" /etc/ssh/sshd_config
 	echo ""
 else
 	sudo sed -i -r "s/^(#|)PasswordAuthentication ((n|N)o|yes)/$sshdFile/" /etc/ssh/sshd_config
 	echo "====================="
 	echo "Modified /etc/ssh/sshd_config file"
 	echo "====================="
-	sudo cat /etc/ssh/sshd_config | grep "$sshFile" --color=always
+	sudo grep --color=always "$sshFile" /etc/ssh/sshd_config
 	echo ""
 	#Restart the ssh service
 	echo "====================="
@@ -155,14 +155,14 @@ fi
 
 #Modify /etc/sudoers file with "# Add 'AAD DC Administrators' group members as admins." & "%AAD\ DC\ Administrators ALL=(ALL) NOPASSWD:ALL"
 sudoersFile="%AAD\ DC\ Administrators@$domainName ALL=(ALL) NOPASSWD:ALL"
-grepSudoersFile=`sudo cat /etc/sudoers | grep -F "$sudoersFile"`
+grepSudoersFile=`sudo grep -F "$sudoersFile" /etc/sudoers`
 #Checking sudoers file
 if [[ "$grepSudoersFile" == *"$sudoersFile"* ]]
 then
 	echo "====================="
 	echo "/etc/sudoers file already contains entry"
 	echo "====================="
-	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
+	sudo grep -F --color=always "$sudoersFile" /etc/sudoers
 	echo ""
 else
 	echo "# Add 'AAD DC Administrators' group members as admins." | sudo tee -a /etc/sudoers
@@ -170,7 +170,7 @@ else
 	echo "====================="
 	echo "Modified /etc/sudoers file"
 	echo "====================="
-	sudo cat /etc/sudoers | grep -F "$sudoersFile" --color=always
+	sudo grep -F --color=always "$sudoersFile" /etc/sudoers
 	echo ""
 fi
 
